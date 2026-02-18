@@ -41,6 +41,12 @@ export function renderTray(wordIndex, trayCards) {
 export function buildPoolSection(poolCards) {
   const container = document.getElementById('pool-cards');
   container.innerHTML = '';
+  // Apply grid layout inline so it works even if CSS is served from cache
+  const cols = poolCards.length / 4;
+  container.style.display = 'grid';
+  container.style.gridTemplateColumns = `repeat(${cols}, auto)`;
+  container.style.justifyContent = 'center';
+  container.style.alignContent = 'center';
   for (const card of poolCards) {
     const rotation = +(Math.random() * 6 - 3).toFixed(1);
     container.appendChild(buildCardEl(card.value, card.id, 'pool', rotation));

@@ -39,7 +39,19 @@ export function startRound() {
   const distractors = shuffle(allCards.filter(v => !needed.includes(v)))
     .slice(0, CONFIG.distractorCount);
 
-  const poolCards = shuffle([...needed, ...distractors]).map(v => ({ value: v, id: nextId() }));
+  // Pad total to next multiple of 4 (for the 4-row grid layout).
+  const baseValues = [...needed, ...distractors];
+  const target = Math.ceil(baseValues.length / 4) * 4;
+  const padCount = target - baseValues.length;
+  if (padCount > 0) {
+    const alreadyIn = new Set(baseValues);
+    const fresh = shuffle(allCards.filter(v => !alreadyIn.has(v)));
+    const fallback = shuffle([...allCards]);
+    const padding = [...fresh, ...fallback].slice(0, padCount);
+    baseValues.push(...padding);
+  }
+
+  const poolCards = shuffle(baseValues).map(v => ({ value: v, id: nextId() }));
 
   // State reset
   state.currentWords = words.map(word => ({ word, trayCards: [] }));

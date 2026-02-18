@@ -126,10 +126,8 @@ body[data-bg="3"] { background-image: url('../assets/backgrounds/bg3.jpg'); }
 }
 
 #pool-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
+  /* display, grid-template-columns, justify-content, align-content
+     are set inline by buildPoolSection() to survive SW cache misses */
   gap: 10px;
   padding: 12px 14px;
   overflow-y: auto;
