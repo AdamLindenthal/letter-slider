@@ -1,0 +1,15 @@
+{
+  "name": "Písmenková Dráha",
+  "short_name": "Písmena",
+  "description": "Česká vzdělávací hra pro prvňáčky – skládej slova z písmen",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "./",
+  "scope": "./",
+  "theme_color": "#4a5c2a",
+  "background_color": "#2d3a1a",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

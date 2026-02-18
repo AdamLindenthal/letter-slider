@@ -1,0 +1,82 @@
+/* ─── Letter Cards — paper cutout style ─── */
+
+.letter-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  min-height: 58px;
+  padding: 5px 10px;
+  background: var(--card-bg);
+  border-radius: 4px;
+  border: 1px solid rgba(138,122,80,0.4);
+  box-shadow:
+    2px 3px 0 rgba(0,0,0,0.28),
+    0 1px 5px rgba(0,0,0,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+
+  /*
+   * Georgia has clearly distinct capital I (has horizontal serifs)
+   * vs lowercase l (different serif style). Critical for first-graders.
+   */
+  font-family: Georgia, 'DejaVu Serif', 'Noto Serif', serif;
+  font-size: clamp(1.3rem, 3.2vw, 1.9rem);
+  font-weight: bold;
+  color: #1a1000;
+  line-height: 1;
+  white-space: nowrap;
+
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  transition: box-shadow 0.1s, opacity 0.15s;
+  position: relative;
+}
+
+/* Subtle paper texture */
+.letter-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.012) 3px,
+    rgba(0,0,0,0.012) 4px
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Pool card hover */
+.letter-card[data-card-context="pool"]:hover {
+  box-shadow:
+    3px 5px 0 rgba(0,0,0,0.32),
+    0 2px 8px rgba(0,0,0,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Tray cards — slightly warmer to indicate "placed" */
+.letter-card[data-card-context="tray"] {
+  background: #ede8d5;
+  border-color: rgba(100,80,40,0.5);
+  cursor: pointer;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.letter-card[data-card-context="tray"]:hover {
+  background: #e4ddc5;
+}
+
+/* Ghost card (clone that follows finger) */
+.letter-card.ghost-card {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.9;
+  box-shadow:
+    4px 8px 18px rgba(0,0,0,0.5),
+    0 2px 6px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}

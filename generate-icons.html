@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generate PWA Icons</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #2d3a1a; color: #c8b560; }
+    canvas { border: 2px solid #4a5c2a; margin: 10px; }
+    button { padding: 10px 20px; background: #4a5c2a; color: #c8b560; border: none; cursor: pointer; font-size: 1rem; border-radius: 4px; margin: 5px; }
+    button:hover { background: #6b7f3e; }
+    .instructions { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-bottom: 16px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h2>PWA Icon Generator — Písmenková Dráha</h2>
+  <div class="instructions">
+    Click the buttons below to download the icons, then place them in
+    <code>assets/icons/</code> as <code>icon-192.png</code> and <code>icon-512.png</code>.
+  </div>
+
+  <div>
+    <canvas id="c192" width="192" height="192"></canvas>
+    <canvas id="c512" width="512" height="512"></canvas>
+  </div>
+
+  <div>
+    <button onclick="download('c192','icon-192.png')">Download icon-192.png</button>
+    <button onclick="download('c512','icon-512.png')">Download icon-512.png</button>
+    <button onclick="downloadBoth()">Download Both</button>
+  </div>
+
+  <script>
+    function drawIcon(canvas) {
+      const ctx = canvas.getContext('2d');
+      const s = canvas.width;
+
+      // Olive background
+      ctx.fillStyle = '#4a5c2a';
+      ctx.fillRect(0, 0, s, s);
+
+      // Camouflage blobs
+      ctx.fillStyle = 'rgba(45,58,26,0.7)';
+      ctx.beginPath();
+      ctx.ellipse(s*0.25, s*0.3, s*0.2, s*0.14, -0.3, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(s*0.75, s*0.65, s*0.22, s*0.15, 0.4, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(s*0.15, s*0.7, s*0.16, s*0.1, 0.2, 0, Math.PI*2);
+      ctx.fill();
+
+      // Stencil letter P
+      ctx.fillStyle = '#c8b560';
+      ctx.font = `bold ${Math.floor(s * 0.72)}px Impact, Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillText('P', s / 2, s * 0.78);
+
+      // Drop shadow on letter
+      ctx.fillStyle = 'rgba(0,0,0,0.3)';
+      ctx.font = `bold ${Math.floor(s * 0.72)}px Impact, Arial`;
+      ctx.fillText('P', s / 2 + s*0.012, s * 0.78 + s*0.012);
+      // Re-draw on top
+      ctx.fillStyle = '#c8b560';
+      ctx.fillText('P', s / 2, s * 0.78);
+
+      // Border
+      ctx.strokeStyle = '#c8b560';
+      ctx.lineWidth = Math.max(2, s * 0.025);
+      const m = ctx.lineWidth / 2;
+      ctx.strokeRect(m, m, s - ctx.lineWidth, s - ctx.lineWidth);
+    }
+
+    // Draw both
+    ['c192','c512'].forEach(id => drawIcon(document.getElementById(id)));
+
+    function download(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadBoth() {
+      download('c192', 'icon-192.png');
+      setTimeout(() => download('c512', 'icon-512.png'), 300);
+    }
+  </script>
+</body>
+</html>

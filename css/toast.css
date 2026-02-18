@@ -1,0 +1,49 @@
+/* ─── SW Update Toast ─── */
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  background: rgba(30,20,5,0.92);
+  border: 1px solid var(--khaki-dark);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  color: var(--card-bg);
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  z-index: 200;
+  white-space: nowrap;
+  animation: slide-up 0.3s ease;
+}
+
+.toast.hidden {
+  display: none;
+}
+
+.toast button {
+  padding: 7px 16px;
+  background: var(--khaki);
+  color: var(--olive-dark);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: background 0.15s;
+}
+
+.toast button:hover {
+  background: var(--khaki-dark);
+  color: #fff;
+}
+
+@keyframes slide-up {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
+}

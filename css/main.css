@@ -1,0 +1,232 @@
+/* ─── Custom font (challenge words only) ─── */
+@font-face {
+  font-family: 'Skolacek';
+  src: url('../assets/fonts/skolacek-ce.otf') format('opentype');
+  font-display: block;
+}
+
+/* ─── CSS Variables ─── */
+:root {
+  --olive-dark:  #2d3a1a;
+  --olive-mid:   #4a5c2a;
+  --olive-light: #6b7f3e;
+  --khaki:       #c8b560;
+  --khaki-dark:  #a08040;
+  --card-bg:     #f5f0e0;
+  --card-shadow: #8a7a50;
+  --green-ok:    #3a7d2a;
+  --hud-bg:      rgba(0,0,0,0.6);
+  --hud-height:  50px;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── Body — rotating camo background images ─── */
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--olive-dark);
+  background-size: cover;
+  background-position: center;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  transition: background-image 0.6s ease;
+}
+
+body[data-bg="1"] { background-image: url('../assets/backgrounds/bg1.jpg'); }
+body[data-bg="2"] { background-image: url('../assets/backgrounds/bg2.jpg'); }
+body[data-bg="3"] { background-image: url('../assets/backgrounds/bg3.jpg'); }
+
+/* ─── Canvas overlay (animations) ─── */
+#anim-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  display: block;
+}
+
+/* ─── HUD ─── */
+#hud {
+  flex-shrink: 0;
+  height: var(--hud-height);
+  background: var(--hud-bg);
+  border-bottom: 2px solid var(--khaki-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#hud-round,
+#hud-score {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  color: var(--khaki);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  min-width: 90px;
+}
+
+#hud-score { text-align: right; }
+
+#hud-title {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: rgba(200,181,96,0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ─── Main game area — always column layout ─── */
+#game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ─── Words section — always a horizontal row ─── */
+#words-section {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  flex-shrink: 0;
+  /* Height determined by content (compact) */
+}
+
+/* ─── Pool section — always at the bottom, fills remaining space ─── */
+#pool-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 2px solid rgba(200,181,96,0.2);
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+#pool-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* Scrollbar */
+#pool-cards::-webkit-scrollbar { width: 5px; }
+#pool-cards::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+#pool-cards::-webkit-scrollbar-thumb { background: var(--olive-light); border-radius: 3px; }
+
+/* ─── Ghost card while dragging ─── */
+.letter-card.dragging {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+  transform: scale(1.1) !important;
+  rotate: none !important;
+}
+
+/* ─── Fire overlay ─── */
+#fire-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+#fire-overlay.hidden {
+  display: none;
+}
+
+#fire-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: radial-gradient(circle, rgba(180,30,10,0.92) 0%, rgba(100,10,5,0.96) 100%);
+  border: 3px solid #ff6020;
+  border-radius: 50%;
+  width: min(200px, 30vw);
+  height: min(200px, 30vw);
+  justify-content: center;
+  box-shadow:
+    0 0 0 6px rgba(255,96,32,0.3),
+    0 0 40px rgba(255,96,32,0.5),
+    0 8px 32px rgba(0,0,0,0.6);
+  animation: fire-pulse 0.8s ease-in-out infinite alternate;
+}
+
+.fire-icon {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255,200,0,0.8));
+}
+
+.fire-label {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
+  color: #fff;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px rgba(255,100,30,0.9);
+}
+
+@keyframes fire-pulse {
+  from { transform: scale(1);    box-shadow: 0 0 0 6px rgba(255,96,32,0.3), 0 0 40px rgba(255,96,32,0.5), 0 8px 32px rgba(0,0,0,0.6); }
+  to   { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(255,96,32,0.15), 0 0 60px rgba(255,96,32,0.7), 0 8px 32px rgba(0,0,0,0.6); }
+}
+
+/* ─── Debug panel ─── */
+#debug-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.85);
+  border-top: 2px solid #ff6020;
+  padding: 8px 12px;
+  z-index: 200;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#debug-panel.hidden { display: none; }
+
+#debug-panel button {
+  padding: 5px 10px;
+  background: #333;
+  color: #ff6020;
+  border: 1px solid #ff6020;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+#debug-panel button:hover { background: #ff6020; color: #000; }

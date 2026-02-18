@@ -1,0 +1,38 @@
+{
+  "tank": {
+    "moving": { "src": "assets/soundfx/tank/moving.mp3", "startMs": 0,    "volume": 0.7 },
+    "aiming": { "src": "assets/soundfx/tank/aming.mp3",  "startMs": 1600, "volume": 0.8 },
+    "fire":   { "src": "assets/soundfx/tank/fire.mp3",   "startMs": 2800, "volume": 1.0 },
+    "impact": { "src": "assets/soundfx/tank/impact.mp3", "startMs": 3300, "volume": 1.0 }
+  },
+  "grenade": {
+    "throw":     { "src": "assets/soundfx/freesound_community-grende-with-falling-earth-90860.mp3", "startMs": 0,    "volume": 0.8 },
+    "explosion": { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 1300, "volume": 1.0 }
+  },
+  "shotgun": {
+    "blast": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3", "startMs": 400, "volume": 0.9 }
+  },
+  "tnt": {
+    "fuse":      { "src": "assets/soundfx/freesound_community-grende-with-falling-earth-90860.mp3", "startMs": 0,    "volume": 0.4 },
+    "explosion": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",               "startMs": 1800, "volume": 1.0 }
+  },
+  "atomic": {
+    "rumble": { "src": "assets/soundfx/freesound_community-grende-with-falling-earth-90860.mp3", "startMs": 600,  "volume": 0.5 },
+    "blast":  { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 1800, "volume": 1.0 }
+  },
+  "drone": {
+    "explosion": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3", "startMs": 2600, "volume": 1.0 }
+  },
+  "helicopter": {
+    "rocket":    { "src": "assets/soundfx/freesound_community-grende-with-falling-earth-90860.mp3", "startMs": 3200, "volume": 0.7 },
+    "explosion": { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 3600, "volume": 1.0 }
+  },
+  "jet": {
+    "explosion": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3", "startMs": 1100, "volume": 1.0 }
+  },
+  "bomber": {
+    "impact1": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",               "startMs": 2800, "volume": 0.85 },
+    "impact2": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",               "startMs": 3300, "volume": 0.9  },
+    "impact3": { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 3800, "volume": 1.0  }
+  }
+}

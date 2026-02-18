@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#4a5c2a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <title>Písmenková Dráha</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/tray.css">
+  <link rel="stylesheet" href="css/toast.css">
+</head>
+<body data-bg="1">
+  <canvas id="anim-canvas"></canvas>
+
+  <div id="hud">
+    <span id="hud-round">Kolo: 1</span>
+    <span id="hud-title">Písmenková Dráha</span>
+    <span id="hud-score">Body: 0</span>
+  </div>
+
+  <main id="game">
+    <!-- Challenge words + their drop trays — always a horizontal row at the top -->
+    <section id="words-section"></section>
+
+    <!-- Pool of letter cards — always at the bottom -->
+    <section id="pool-section">
+      <div id="pool-cards"></div>
+    </section>
+  </main>
+
+  <!-- Fire button: appears when all words are correctly assembled -->
+  <div id="fire-overlay" class="hidden" role="button" aria-label="Spustit animaci">
+    <div id="fire-btn">
+      <div class="fire-icon">💣</div>
+      <div class="fire-label">STŘELBA!</div>
+    </div>
+  </div>
+
+  <!-- Debug panel (only shown when ?debug=1 is in the URL) -->
+  <div id="debug-panel" class="hidden"></div>
+
+  <div id="toast-update" class="toast hidden">
+    <span>Nová verze je dostupná!</span>
+    <button id="toast-reload-btn">Aktualizovat</button>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

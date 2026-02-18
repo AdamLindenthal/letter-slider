@@ -1,0 +1,103 @@
+/* ─── Word Zone (challenge word + drop tray) ─── */
+
+.word-zone {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.35);
+  border: 2px solid rgba(200,181,96,0.35);
+  border-radius: 8px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+/* Solved state — green glow */
+.word-zone.solved {
+  border-color: var(--green-ok);
+  background: rgba(58,125,42,0.25);
+  box-shadow: 0 0 18px rgba(58,125,42,0.4), inset 0 0 8px rgba(58,125,42,0.15);
+}
+
+/* ─── Challenge word label (Skolacek cursive) ─── */
+.word-label {
+  font-family: 'Skolacek', serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: var(--khaki);
+  text-shadow: 1px 2px 5px rgba(0,0,0,0.7);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-align: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+/* ─── Drop tray (where cards are placed) ─── */
+.word-tray {
+  min-height: 58px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  background: rgba(255,255,255,0.06);
+  border: 2px dashed rgba(200,181,96,0.4);
+  border-radius: 5px;
+  transition: border-color 0.15s, background 0.15s;
+  flex: 1;
+}
+
+.word-tray:empty::before {
+  content: '↓ přetáhni';
+  color: rgba(200,181,96,0.3);
+  font-size: 0.8rem;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.word-tray.drag-over {
+  border-color: var(--khaki);
+  background: rgba(200,181,96,0.12);
+  border-style: solid;
+}
+
+.word-zone.solved .word-tray {
+  border-color: rgba(58,125,42,0.6);
+  border-style: solid;
+  background: rgba(58,125,42,0.1);
+}
+
+/* ─── Card blown-away animation (triggered by victory) ─── */
+@keyframes card-blast {
+  0%   { opacity: 1; }
+  15%  { opacity: 1; transform: rotate(var(--br)) translateX(var(--bx)) translateY(var(--by)) scale(1.15); }
+  100% { opacity: 0; transform: rotate(calc(var(--br) * 2.5)) translateX(calc(var(--bx) * 3)) translateY(calc(var(--by) * 3 + 40px)) scale(0.1); }
+}
+
+.letter-card.card-blown {
+  animation: card-blast 0.65s ease-in forwards;
+  pointer-events: none;
+}
+
+/* ─── Exploding word label animation ─── */
+@keyframes shake-explode {
+  0%   { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
+  10%  { transform: translateX(-6px) rotate(-3deg); }
+  20%  { transform: translateX(6px) rotate(3deg); }
+  30%  { transform: translateX(-6px) rotate(-3deg); }
+  40%  { transform: translateX(6px) rotate(3deg) scale(1.05); }
+  55%  { transform: translateX(0) scale(1.15); opacity: 1; }
+  75%  { transform: scale(0.3); opacity: 0.4; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+.word-label.exploding {
+  animation: shake-explode 0.65s ease-in forwards;
+  pointer-events: none;
+}
