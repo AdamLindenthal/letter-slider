@@ -46,7 +46,7 @@ export function buildPoolSection(poolCards) {
   container.style.display = 'grid';
   container.style.gridTemplateColumns = `repeat(${cols}, auto)`;
   container.style.justifyContent = 'center';
-  container.style.alignContent = 'center';
+  container.style.alignContent = 'start';
   for (const card of poolCards) {
     const rotation = +(Math.random() * 6 - 3).toFixed(1);
     container.appendChild(buildCardEl(card.value, card.id, 'pool', rotation));

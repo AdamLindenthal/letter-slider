@@ -1,6 +1,6 @@
 import { CONFIG } from './config.js';
 import { state, saveProgress } from './state.js';
-import { WORDS, getAllCardValues } from './words.js';
+import { WORDS, getAllCardValues, getWordCards } from './words.js';
 import {
   buildWordsSection, buildPoolSection, renderTray,
   setSolvedState, getWordLabelEls, updateHUD,
@@ -29,12 +29,8 @@ export function startRound() {
 
   const words = selected.map(i => WORDS[i]);
 
-  // Pool: syllable cards + individual letter cards + distractors.
-  // Both are included so the child can compose words either way.
-  const needed     = [...new Set(words.flatMap(w => [
-    ...w.cards,
-    ...[...w.display.normalize('NFC')],
-  ]))];
+  // Pool: syllables (if defined) + individual letters + distractors.
+  const needed = [...new Set(words.flatMap(getWordCards))];
   const allCards   = getAllCardValues();
   const distractors = shuffle(allCards.filter(v => !needed.includes(v)))
     .slice(0, CONFIG.distractorCount);

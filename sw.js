@@ -1,4 +1,4 @@
-const CACHE_NAME = 'letter-slider-v3';
+const CACHE_NAME = 'letter-slider-v5';
 
 // Core assets — install fails if any of these are missing
 const PRECACHE_REQUIRED = [

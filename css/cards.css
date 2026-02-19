@@ -63,6 +63,9 @@
   border-color: rgba(100,80,40,0.5);
   cursor: pointer;
   font-size: clamp(1.2rem, 3vw, 1.8rem);
+  /* Allow shrinking so many cards still fit on one row */
+  flex-shrink: 1;
+  min-width: 36px;
 }
 
 .letter-card[data-card-context="tray"]:hover {
