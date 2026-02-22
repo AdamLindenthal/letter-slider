@@ -7,6 +7,8 @@ import { droneAnimation }      from './drone.js';
 import { helicopterAnimation } from './helicopter.js';
 import { jetAnimation }        from './jet.js';
 import { bomberAnimation }     from './bomber.js';
+import { artilleryAnimation }  from './artillery.js';
+import { spgAnimation }        from './spg.js';
 import { scheduleSounds }      from '../audio.js';
 import { clearCanvas, fadeOutCanvas } from '../canvas.js';
 import { blowAwayTrayCards }   from '../render.js';
@@ -21,6 +23,8 @@ const ANIMATIONS = {
   helicopter: helicopterAnimation,
   jet:        jetAnimation,
   bomber:     bomberAnimation,
+  artillery:  artilleryAnimation,
+  spg:        spgAnimation,
 };
 
 const NAMES = Object.keys(ANIMATIONS);

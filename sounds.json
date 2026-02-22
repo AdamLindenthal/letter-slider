@@ -34,5 +34,13 @@
     "impact1": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",               "startMs": 2800, "volume": 0.85 },
     "impact2": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",               "startMs": 3300, "volume": 0.9  },
     "impact3": { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 3800, "volume": 1.0  }
+  },
+  "artillery": {
+    "fire":   { "src": "assets/soundfx/tank/fire.mp3",                                            "startMs": 3300, "volume": 1.0  },
+    "impact": { "src": "assets/soundfx/daviddumaisaudio-grenade-explosion-14-190266.mp3",         "startMs": 3800, "volume": 1.0  }
+  },
+  "spg": {
+    "fire":   { "src": "assets/soundfx/tank/fire.mp3",                                            "startMs": 3050, "volume": 1.0  },
+    "impact": { "src": "assets/soundfx/freesound_community-hq-explosion-6288.mp3",                "startMs": 3550, "volume": 1.0  }
   }
 }

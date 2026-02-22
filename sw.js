@@ -1,4 +1,4 @@
-const CACHE_NAME = 'letter-slider-v5';
+const CACHE_NAME = 'letter-slider-v6';
 
 // Core assets — install fails if any of these are missing
 const PRECACHE_REQUIRED = [
@@ -30,6 +30,8 @@ const PRECACHE_REQUIRED = [
   './js/animations/helicopter.js',
   './js/animations/jet.js',
   './js/animations/bomber.js',
+  './js/animations/artillery.js',
+  './js/animations/spg.js',
   './assets/fonts/skolacek-ce.otf',
 ];
 
